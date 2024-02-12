@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Button, Modal, Image, Table, Space, Pagination } from "antd";
+import { Modal, Image, Table, Space } from "antd";
 import "./Get.css";
 import Delete from "../delete/Delete";
 import Edit from "../edit/Edit";
 
-function Get({ products, setSkip }) {
+function Get({ products }) {
   const [selectedProductId, setSelectedProductId] = useState(null);
   
   
@@ -87,35 +87,60 @@ function Get({ products, setSkip }) {
           <Delete id={record.id} />
         </Space>
       ),
+    }
+  ];
+  const columns2 = [
+    {
+      title: "ID",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
+      title: "Name",
+      dataIndex: "rating",
+      key: "rating",
+    },
+    {
+      title: "Link",
+      dataIndex: "brand",
+      key: "brand",
+    },
+    {
+      title: "lat",
+      dataIndex: "stock",
+      key: "stock",
+    },
+    {
+      title: "long",
+      dataIndex: "category",
+      key: "category",
+    },
+    {
+      title: "information",
+      dataIndex: "description",
+      key: "description",
+    },
+    {
+      title: "department",
+      dataIndex: "price",
+      key: "price",
+      render: (price) => `${price}$`,
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <Edit
+            id={record.id}
+            onEdit={handleEditSuccess}
+            productDetails={record}
+          />
+          <Delete id={record.id} />
+        </Space>
+      ),
     },
   ];
-  // const columns2 = [
-  //   {
-  //     title: "Title",
-  //     dataIndex: "title",
-  //     key: "title",
-  //   },
-  //   {
-  //     title: "Price",
-  //     dataIndex: "price",
-  //     key: "price",
-  //     render: (price) => `${price}$`,
-  //   },
-  //   {
-  //     title: "Action",
-  //     key: "action",
-  //     render: (_, record) => (
-  //       <Space size="middle">
-  //         <Edit
-  //           id={record.id}
-  //           onEdit={handleEditSuccess}
-  //           productDetails={record}
-  //         />
-  //         <Delete id={record.id} />
-  //       </Space>
-  //     ),
-  //   },
-  // ];
   return (
     <div>
       <div className="table1">
@@ -123,14 +148,14 @@ function Get({ products, setSkip }) {
          pagination={false}
           />
       </div>
-      {/* <div className="table2">
+       <div className="table2">
         <Table
           columns={columns2}
           dataSource={products}
           pagination={false}
           style={{ width: "100%" }}
         />
-      </div> */}
+      </div> 
       <br />
       {/* <center>
         <Pagination
